@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -87,9 +88,38 @@ public class TrabajoAD {
         lector.close();
     }
     
-    private static void opcion2() {
-        
+    private static void opcion2() throws FileNotFoundException, IOException {
+        //Preguntamos por cada dato y lo guardamos
+        Scanner es = new Scanner(System.in);
+        System.out.println("Escribe el restaurante"); 
+        String restaurant = es.next();
+        System.out.println("Escribe la dirección"); 
+        String adress = es.next();
+        Scanner sr = new Scanner(System.in);
+        System.out.println("Escribe la ciudad"); 
+        String city = sr.next();
+        System.out.println("Escribe el estado"); 
+        String state = sr.next();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Escribe el codigo postal"); 
+        String zipcode = sc.next();
+        //Configuramos lector de ficheros
+        BufferedReader lector = new BufferedReader(new FileReader("Restaurants.csv"));
+        //Lee la linea del archivo
+        String lineaArchivo = lector.readLine();
+        String linea = new String(restaurant + "," + adress + "," + city + "," + state + "," + zipcode); //Linea a escribir
+
+        FileWriter fw = new FileWriter("Restaurants.csv", true);              
+
+                fw.write(linea + "\n"); //se escribe
+                linea = lector.readLine();
+
+
+        //Lectura terminada, cerramos lector
+        fw.close();
+        lector.close();
     }
+    
 
     private static void opcion3() throws FileNotFoundException, IOException {
         Scanner sn = new Scanner(System.in);
